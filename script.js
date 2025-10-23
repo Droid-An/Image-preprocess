@@ -1,15 +1,19 @@
 "use strict";
 const upload = document.getElementById("upload");
 const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d", { willReadFrequently: true });
 const thresholdSlider = document.getElementById("threshold");
 const blurSlider = document.getElementById("blur");
 const downloadBtn = document.getElementById("download");
+const thresholdValue = document.getElementById("thresholdValue");
+const blurValue = document.getElementById("blurValue");
 
 let img = new Image();
 
 function processImage() {
+  // return if cv or img is't downloaded
   if (!cv || !img.complete) return;
+  // fit canvas to keep the actual size of an image to avoid scaling
   canvas.width = img.width;
   canvas.height = img.height;
   ctx.drawImage(img, 0, 0);
@@ -31,6 +35,9 @@ function processImage() {
   src.delete();
   dst.delete();
   blurred.delete();
+  blurValue.textContent = parseInt(blurSlider.value);
+  thresholdValue.textContent = parseInt(thresholdSlider.value);
+  // console.log(parseInt(thresholdSlider.value));
 }
 
 upload.addEventListener("change", (e) => {

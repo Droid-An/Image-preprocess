@@ -1,0 +1,27 @@
+body {
+    font-family: sans-serif;
+    background: #f8f9fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem;
+}
+
+canvas {
+    border: 1px solid #ccc;
+    max-width: 90vw;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 300px;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+}

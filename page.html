@@ -25,11 +25,20 @@
             <input type="range" id="blur" min="1" max="25" step="2" value="1" />
             <p class="control value" id="blurValue"></p>
         </label>
-
         <button id="download">Download Processed Image</button>
     </div>
 
-    <canvas id="canvas" willReadFrequently=true></canvas>
+    <div class="main">
+        <div class="canvas-container">
+            <h3>Original Image</h3>
+            <canvas id="canvasOriginal"></canvas>
+        </div>
+
+        <div class="canvas-container">
+            <h3>Processed Image</h3>
+            <canvas id="canvasProcessed"></canvas>
+        </div>
+    </div>
 
     <script defer src="script.js"></script>
 </body>

@@ -69,7 +69,7 @@ downloadBtn.addEventListener("click", () => {
 });
 function setUp() {
   img = new Image();
-  img.src = "demoPhoto/processed_image.png";
+  img.src = "demoPhoto/manja-vitolic-gKXKBY-C-Dk-unsplash.jpg";
 
   img.onload = () => {
     processImage();

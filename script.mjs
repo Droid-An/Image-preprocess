@@ -11,6 +11,7 @@ const ctxOriginal = canvasOriginal.getContext("2d", {
 });
 const controlsContainer = document.querySelector(".controls");
 const tabButtons = document.querySelectorAll(".tabs button");
+// const downloadBtn = document.getElementById("download");
 
 const Get = (id) => controlsContainer.querySelector(`#${id}`);
 
@@ -68,6 +69,7 @@ function loadTemplate(templateId) {
   const tpl = document.getElementById(templateId).content.cloneNode(true);
   controlsContainer.replaceChildren(tpl);
   updateControlValues();
+  addDownloadButton();
   // Add listeners dynamically
   controlsContainer
     .querySelectorAll("input[type='range']")
@@ -77,6 +79,19 @@ function loadTemplate(templateId) {
         processImage();
       };
     });
+}
+
+function addDownloadButton() {
+  const downloadBtn = document
+    .getElementById("downloadButtonTemplate")
+    .content.cloneNode(true);
+  downloadBtn.querySelector("#download").addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = "processed_image.png";
+    link.href = canvasProcessed.toDataURL();
+    link.click();
+  });
+  controlsContainer.appendChild(downloadBtn);
 }
 
 tabButtons.forEach((btn) => {

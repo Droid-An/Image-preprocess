@@ -12,10 +12,6 @@ const ctxOriginal = canvasOriginal.getContext("2d", {
 const controlsContainer = document.querySelector(".controls");
 const tabButtons = document.querySelectorAll(".tabs button");
 
-const cValue = document.getElementById("cValue");
-
-const showButton = document.getElementById("showButton");
-
 const Get = (id) => controlsContainer.querySelector(`#${id}`);
 
 let img = new Image();
@@ -44,9 +40,9 @@ function processImage() {
   if (activeTab === "simpleThresholdcontrolsTemplate") {
     dst = simpleThreshold(src, dst, Get);
   } else if (activeTab === "adaptiveThresholdcontrolsTemplate") {
-    // Adaptive threshold
     dst = adaptiveThresholdView(src, dst, Get);
   }
+
   cv.imshow(canvasProcessed, dst);
   src.delete();
   dst.delete();
@@ -59,15 +55,27 @@ upload.addEventListener("change", (e) => {
   img.onload = processImage;
 });
 
+function updateControlValues() {
+  controlsContainer
+    .querySelectorAll("input[type='range']")
+    .forEach((slider) => {
+      const valueEl = controlsContainer.querySelector(`#${slider.id}Value`);
+      if (valueEl) valueEl.textContent = slider.value;
+    });
+}
+
 function loadTemplate(templateId) {
   const tpl = document.getElementById(templateId).content.cloneNode(true);
   controlsContainer.replaceChildren(tpl);
-
+  updateControlValues();
   // Add listeners dynamically
   controlsContainer
     .querySelectorAll("input[type='range']")
     .forEach((slider) => {
-      slider.oninput = processImage;
+      slider.oninput = () => {
+        updateControlValues();
+        processImage();
+      };
     });
 }
 

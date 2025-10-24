@@ -13,12 +13,13 @@
     <h2>Image Preprocessing Tool</h2>
     <input type="file" id="upload" accept="image/*" />
 
+    <div class="tabs">
+        <button data-template="simpleThresholdcontrolsTemplate" class="active">Simple Threshold</button>
+        <button data-template="adaptiveThresholdcontrolsTemplate">Adaptive Threshold</button>
+    </div>
     <div class="controls">
-
-
     </div>
 
-    <button id=" showButton">Show hidden content</button>
     <main>
         <div class="canvas-container">
             <h3>Original Image</h3>
@@ -31,7 +32,7 @@
         </div>
     </main>
 
-    <script defer src="script.mjs"></script>
+    <script defer type="module" src="script.mjs"></script>
 
 
     <!---TEMPLATES FOLLOW-->

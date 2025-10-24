@@ -56,26 +56,25 @@ upload.addEventListener("change", (e) => {
   img.onload = processImage;
 });
 
-function updateControlValues() {
-  controlsContainer
-    .querySelectorAll("input[type='range']")
-    .forEach((slider) => {
-      const valueEl = controlsContainer.querySelector(`#${slider.id}Value`);
-      if (valueEl) valueEl.textContent = slider.value;
-    });
+function updateSliderValue(slider) {
+  const valueEl = controlsContainer.querySelector(`#${slider.id}Value`);
+  if (valueEl) valueEl.textContent = slider.value;
 }
 
 function loadTemplate(templateId) {
   const tpl = document.getElementById(templateId).content.cloneNode(true);
   controlsContainer.replaceChildren(tpl);
-  updateControlValues();
+
   addDownloadButton();
   // Add listeners dynamically
   controlsContainer
     .querySelectorAll("input[type='range']")
     .forEach((slider) => {
+      // set initial label text
+      updateSliderValue(slider);
       slider.oninput = () => {
-        updateControlValues();
+        // updateControlValues();
+        updateSliderValue(slider);
         processImage();
       };
     });

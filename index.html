@@ -14,8 +14,8 @@
     <input type="file" id="upload" accept="image/*" />
 
     <div class="tabs">
-        <button data-template="simpleThresholdcontrolsTemplate" class="active">Simple Threshold</button>
-        <button data-template="adaptiveThresholdcontrolsTemplate">Adaptive Threshold</button>
+        <button data-template="simpleThresholdControlsTemplate" class="active">Simple Threshold</button>
+        <button data-template="adaptiveThresholdControlsTemplate">Adaptive Threshold</button>
     </div>
     <div class="controls">
     </div>
@@ -32,6 +32,10 @@
         </div>
     </main>
 
+    <aside class="info-box">
+
+    </aside>
+
     <footer>Project is using <a href="https://github.com/opencv/opencv">OpenCV library</a>.
         <a href="https://github.com/Droid-An/Image-preprocess">Project on GitHub</a>
     </footer>
@@ -39,7 +43,7 @@
 
     <!---TEMPLATES FOLLOW-->
 
-    <template id="simpleThresholdcontrolsTemplate">
+    <template id="simpleThresholdControlsTemplate">
         <label>
             Threshold:
             <input type="range" id="threshold" min="0" max="255" value="128" />
@@ -52,7 +56,7 @@
             <p class="control value" id="blurValue"></p>
         </label>
     </template>
-    <template id="adaptiveThresholdcontrolsTemplate">
+    <template id="adaptiveThresholdControlsTemplate">
         <label>
             Block Size:
             <input type="range" id="blockSize" min="3" max="25" step="2" value="11" />
@@ -60,7 +64,7 @@
         </label>
 
         <label>
-            Consonant (C):
+            Constant (C):
             <input type="range" id="c" min="1" max="25" value="2" />
             <p class="control value" id="cValue"></p>
         </label>

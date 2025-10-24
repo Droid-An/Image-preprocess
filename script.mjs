@@ -2,7 +2,7 @@
 
 import { adaptiveThresholdView } from "./views/adaptiveThresholding.mjs";
 import { simpleThreshold } from "./views/simpleThreshold.mjs";
-
+import { infoTexts } from "./texts.mjs";
 const upload = document.getElementById("upload");
 const canvasOriginal = document.getElementById("canvasOriginal");
 const canvasProcessed = document.getElementById("canvasProcessed");
@@ -11,7 +11,7 @@ const ctxOriginal = canvasOriginal.getContext("2d", {
 });
 const controlsContainer = document.querySelector(".controls");
 const tabButtons = document.querySelectorAll(".tabs button");
-// const downloadBtn = document.getElementById("download");
+const box = document.querySelector(".info-box");
 
 const Get = (id) => controlsContainer.querySelector(`#${id}`);
 
@@ -38,9 +38,9 @@ function processImage() {
 
   let dst = new cv.Mat();
 
-  if (activeTab === "simpleThresholdcontrolsTemplate") {
+  if (activeTab === "simpleThresholdControlsTemplate") {
     dst = simpleThreshold(src, dst, Get);
-  } else if (activeTab === "adaptiveThresholdcontrolsTemplate") {
+  } else if (activeTab === "adaptiveThresholdControlsTemplate") {
     dst = adaptiveThresholdView(src, dst, Get);
   }
 
@@ -97,15 +97,22 @@ tabButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     tabButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    loadTemplate(btn.dataset.template);
+    const template = btn.dataset.template;
+    updateInfoBox(template);
+    loadTemplate(template);
     processImage();
   });
 });
 
-function setUp() {
-  loadTemplate("simpleThresholdcontrolsTemplate");
-  img.src = "demoPhoto/manja-vitolic-gKXKBY-C-Dk-unsplash.jpg";
+function updateInfoBox(templateId) {
+  box.innerHTML = infoTexts[templateId] || "<p>No info available</p>";
+}
 
+function setUp() {
+  const templateId = "simpleThresholdControlsTemplate";
+  img.src = "demoPhoto/manja-vitolic-gKXKBY-C-Dk-unsplash.jpg";
+  loadTemplate(templateId);
+  updateInfoBox(templateId);
   img.onload = () => {
     processImage();
   };

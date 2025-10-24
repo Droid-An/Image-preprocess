@@ -9,7 +9,7 @@ const infoTexts = {
 
     <h4>Parameters</h4>
     <p>
-      <strong>Threshold:</strong> Global cutoff (0–255). Increasing the threshold makes fewer pixels white; 
+      <strong>Threshold:</strong> Global cutoff (0-255). Increasing the threshold makes fewer pixels white; 
       decreasing it makes more pixels white.
     </p>
     <p>

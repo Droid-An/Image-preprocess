@@ -28,7 +28,7 @@ label {
     align-items: baseline;
 }
 /* ---- Layout container ---- */
-.main {
+main {
   display: flex;
   justify-content: space-around;
   align-items: center;

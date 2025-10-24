@@ -14,6 +14,29 @@
     <input type="file" id="upload" accept="image/*" />
 
     <div class="controls">
+
+
+    </div>
+
+    <button id=" showButton">Show hidden content</button>
+    <main>
+        <div class="canvas-container">
+            <h3>Original Image</h3>
+            <canvas id="canvasOriginal"></canvas>
+        </div>
+
+        <div class="canvas-container">
+            <h3>Processed Image</h3>
+            <canvas id="canvasProcessed"></canvas>
+        </div>
+    </main>
+
+    <script defer src="script.mjs"></script>
+
+
+    <!---TEMPLATES FOLLOW-->
+
+    <template id="simpleThresholdcontrolsTemplate">
         <label>
             Threshold:
             <input type="range" id="threshold" min="0" max="255" value="128" />
@@ -25,22 +48,25 @@
             <input type="range" id="blur" min="1" max="25" step="2" value="1" />
             <p class="control value" id="blurValue"></p>
         </label>
+    </template>
+    <template id="adaptiveThresholdcontrolsTemplate">
+        <label>
+            Block Size:
+            <input type="range" id="blockSize" min="3" max="25" step="2" value="11" />
+            <p class="control value" id="blockSizeValue"></p>
+        </label>
+
+        <label>
+            Consonant (C):
+            <input type="range" id="c" min="1" max="25" value="2" />
+            <p class="control value" id="cValue"></p>
+        </label>
+    </template>
+
+
+    <template id="downloadButtonTemplate">
         <button id="download">Download Processed Image</button>
-    </div>
-
-    <div class="main">
-        <div class="canvas-container">
-            <h3>Original Image</h3>
-            <canvas id="canvasOriginal"></canvas>
-        </div>
-
-        <div class="canvas-container">
-            <h3>Processed Image</h3>
-            <canvas id="canvasProcessed"></canvas>
-        </div>
-    </div>
-
-    <script defer src="script.js"></script>
+    </template>
 </body>
 
 </html>

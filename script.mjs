@@ -3,6 +3,7 @@
 import { adaptiveThreshold } from "./methods/adaptiveThresholding.mjs";
 import { simpleThreshold } from "./methods/simpleThreshold.mjs";
 import { infoTexts } from "./texts.mjs";
+import { optionsTexts } from "./optionsTexts.mjs";
 const upload = document.getElementById("upload");
 const canvasOriginal = document.getElementById("canvasOriginal");
 const canvasProcessed = document.getElementById("canvasProcessed");
@@ -11,7 +12,9 @@ const ctxOriginal = canvasOriginal.getContext("2d", {
 });
 const controlsContainer = document.querySelector(".controls");
 const tabButtons = document.querySelectorAll(".tabs button");
-const box = document.querySelector(".info-box");
+const box = document.querySelector(".info_box");
+const optionInfoBox = document.querySelector(".additional_options_info_box");
+const loadingMsg = document.getElementById("loadingMsg");
 
 const Get = (id) => controlsContainer.querySelector(`#${id}`);
 
@@ -23,9 +26,8 @@ function drawOriginal() {
   ctxOriginal.drawImage(img, 0, 0);
 }
 
-function processImage() {
+function processImage(option) {
   if (!cv || !img.complete) return;
-
   drawOriginal();
   canvasProcessed.width = img.width;
   canvasProcessed.height = img.height;
@@ -39,10 +41,22 @@ function processImage() {
   let dst = new cv.Mat();
 
   if (activeTab === "simpleThresholdControlsTemplate") {
-    dst = simpleThreshold(src, dst, Get);
+    if (option == "otsu") {
+      const result = simpleThreshold(src, dst, Get, "otsu");
+      dst = result.dst;
+      // update slider value so user can see which value method applied
+      if (result.otsuThreshold > 0) {
+        const thresholdSlider = Get("threshold");
+        thresholdSlider.value = Math.round(result.otsuThreshold);
+        updateSliderValue(thresholdSlider);
+      }
+    } else {
+      simpleThreshold(src, dst, Get);
+    }
   } else if (activeTab === "adaptiveThresholdControlsTemplate") {
     dst = adaptiveThreshold(src, dst, Get);
   }
+  loadingMsg.classList.add("hidden");
 
   cv.imshow(canvasProcessed, dst);
   src.delete();
@@ -73,13 +87,22 @@ function loadTemplate(templateId) {
       // set initial label text
       updateSliderValue(slider);
       slider.oninput = () => {
-        // updateControlValues();
         updateSliderValue(slider);
         processImage();
       };
     });
+  if (templateId == "simpleThresholdControlsTemplate") {
+    addOtsuOption();
+  }
 }
 
+function addOtsuOption() {
+  const otsuButton = controlsContainer.querySelector("#OtsuBinarization");
+  otsuButton.addEventListener("click", () => {
+    processImage("otsu");
+    updateSliderValue("threshold");
+  });
+}
 function addDownloadButton() {
   const downloadBtn = document
     .getElementById("downloadButtonTemplate")
@@ -100,12 +123,20 @@ tabButtons.forEach((btn) => {
     const template = btn.dataset.template;
     updateInfoBox(template);
     loadTemplate(template);
+    console.log("process");
     processImage();
   });
 });
 
 function updateInfoBox(templateId) {
   box.innerHTML = infoTexts[templateId] || "<p>No info available</p>";
+  if (typeof optionsTexts[templateId] === "undefined") {
+    optionInfoBox.style.display = "none";
+  } else {
+    optionInfoBox.style.display = "block";
+    optionInfoBox.innerHTML =
+      optionsTexts[templateId] || "<p>No info available</p>";
+  }
 }
 
 function setUp() {
@@ -113,6 +144,7 @@ function setUp() {
   img.src = "demoPhoto/manja-vitolic-gKXKBY-C-Dk-unsplash.jpg";
   loadTemplate(templateId);
   updateInfoBox(templateId);
+  //initial preprocess
   img.onload = () => {
     processImage();
   };

@@ -12,7 +12,7 @@
 <body>
     <h2>Image Preprocessing Tool</h2>
     <input type="file" id="upload" accept="image/*" />
-
+    <p id="loadingMsg">Loading...</p>
     <div class="tabs">
         <button data-template="simpleThresholdControlsTemplate" class="active">Simple Threshold</button>
         <button data-template="adaptiveThresholdControlsTemplate">Adaptive Threshold</button>
@@ -31,7 +31,8 @@
             <canvas id="canvasProcessed"></canvas>
         </div>
     </main>
-    <aside class="info-box"></aside>
+    <aside class="additional_options_info_box"></aside>
+    <aside class="info_box"></aside>
 
     <footer>Project is using <a href="https://github.com/opencv/opencv">OpenCV library</a>.
         <a href="https://github.com/Droid-An/Image-preprocess">Project on GitHub</a>
@@ -51,6 +52,11 @@
             Blur Radius:
             <input type="range" id="blur" min="1" max="25" step="2" value="1" />
             <p class="control value" id="blurValue"></p>
+        </label>
+
+        <label>
+            Use Otsu's Binarization:
+            <button id="OtsuBinarization">Click</button>
         </label>
     </template>
     <template id="adaptiveThresholdControlsTemplate">

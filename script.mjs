@@ -2,19 +2,20 @@
 
 import { adaptiveThreshold } from "./methods/adaptiveThresholding.mjs";
 import { simpleThreshold } from "./methods/simpleThreshold.mjs";
-import { infoTexts } from "./texts.mjs";
-import { optionsTexts } from "./optionsTexts.mjs";
+import { infoTexts } from "./texts/texts.mjs";
+import { optionsTexts } from "./texts/optionsTexts.mjs";
+
+const loadingMsg = document.getElementById("loadingMsg");
 const upload = document.getElementById("upload");
+const tabButtons = document.querySelectorAll(".tabs button");
 const canvasOriginal = document.getElementById("canvasOriginal");
 const canvasProcessed = document.getElementById("canvasProcessed");
 const ctxOriginal = canvasOriginal.getContext("2d", {
   willReadFrequently: true,
 });
 const controlsContainer = document.querySelector(".controls");
-const tabButtons = document.querySelectorAll(".tabs button");
-const box = document.querySelector(".info_box");
+const methodInfoBox = document.querySelector(".method_info_box");
 const optionInfoBox = document.querySelector(".additional_options_info_box");
-const loadingMsg = document.getElementById("loadingMsg");
 
 const Get = (id) => controlsContainer.querySelector(`#${id}`);
 
@@ -129,7 +130,7 @@ tabButtons.forEach((btn) => {
 });
 
 function updateInfoBox(templateId) {
-  box.innerHTML = infoTexts[templateId] || "<p>No info available</p>";
+  methodInfoBox.innerHTML = infoTexts[templateId] || "<p>No info available</p>";
   if (typeof optionsTexts[templateId] === "undefined") {
     optionInfoBox.style.display = "none";
   } else {

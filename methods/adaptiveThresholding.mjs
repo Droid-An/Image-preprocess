@@ -1,8 +1,8 @@
 function adaptiveThreshold(src, dst, get_helper) {
   // Adaptive threshold
-  let blockSize = parseInt(get_helper("blockSize")?.value ?? 11);
+  let blockSize = parseInt(get_helper("blockSize").value);
   if (blockSize % 2 === 0) blockSize += 1;
-  let c = parseInt(get_helper("c")?.value ?? 2);
+  let c = parseInt(get_helper("c").value);
   cv.adaptiveThreshold(
     src,
     dst,

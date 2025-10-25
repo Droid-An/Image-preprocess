@@ -1,7 +1,7 @@
 "use strict";
 
 import { adaptiveThreshold } from "./methods/adaptiveThresholding.mjs";
-import { simpleThreshold } from "./methods/simpleThreshold.mjs";
+import { simpleThresholdAndBlur } from "./methods/simpleThresholdAndBlur.mjs";
 import { infoTexts } from "./texts/texts.mjs";
 import { optionsTexts } from "./texts/optionsTexts.mjs";
 
@@ -43,7 +43,7 @@ function processImage(option) {
 
   if (activeTab === "simpleThresholdControlsTemplate") {
     if (option == "otsu") {
-      const result = simpleThreshold(src, dst, Get, "otsu");
+      const result = simpleThresholdAndBlur(src, dst, Get, "otsu");
       dst = result.dst;
       // update slider value so user can see which value method applied
       if (result.otsuThreshold > 0) {
@@ -52,7 +52,7 @@ function processImage(option) {
         updateSliderValue(thresholdSlider);
       }
     } else {
-      simpleThreshold(src, dst, Get);
+      simpleThresholdAndBlur(src, dst, Get);
     }
   } else if (activeTab === "adaptiveThresholdControlsTemplate") {
     dst = adaptiveThreshold(src, dst, Get);

@@ -29,7 +29,7 @@ function drawOriginal() {
 
 function processImage(option) {
   if (!cv || !img.complete) return;
-  drawOriginal();
+
   canvasProcessed.width = img.width;
   canvasProcessed.height = img.height;
 
@@ -68,7 +68,10 @@ upload.addEventListener("change", (e) => {
   if (!file) return;
   img.src = URL.createObjectURL(file);
 
-  img.onload = processImage;
+  img.onload = () => {
+    drawOriginal();
+    processImage();
+  };
 });
 
 function updateSliderValue(slider) {
@@ -147,6 +150,7 @@ function setUp() {
   updateInfoBox(templateId);
   //initial preprocess
   img.onload = () => {
+    drawOriginal();
     processImage();
   };
 

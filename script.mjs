@@ -130,8 +130,13 @@ tabButtons.forEach((btn) => {
 
 function updateInfoBox(templateId) {
   box.innerHTML = infoTexts[templateId] || "<p>No info available</p>";
-  optionInfoBox.innerHTML =
-    optionsTexts[templateId] || "<p>No info available</p>";
+  if (typeof optionsTexts[templateId] === "undefined") {
+    optionInfoBox.style.display = "none";
+  } else {
+    optionInfoBox.style.display = "block";
+    optionInfoBox.innerHTML =
+      optionsTexts[templateId] || "<p>No info available</p>";
+  }
 }
 
 function setUp() {

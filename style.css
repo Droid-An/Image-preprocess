@@ -125,7 +125,7 @@ canvas {
     order: 1;
   }
 
-  .info_box {
+  .method_info_box {
     box-sizing: border-box;
     position: static;
     width: 100%;

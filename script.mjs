@@ -3,6 +3,7 @@
 import { adaptiveThreshold } from "./methods/adaptiveThresholding.mjs";
 import { simpleThreshold } from "./methods/simpleThreshold.mjs";
 import { infoTexts } from "./texts.mjs";
+import { optionsTexts } from "./optionsTexts.mjs";
 const upload = document.getElementById("upload");
 const canvasOriginal = document.getElementById("canvasOriginal");
 const canvasProcessed = document.getElementById("canvasProcessed");
@@ -11,7 +12,8 @@ const ctxOriginal = canvasOriginal.getContext("2d", {
 });
 const controlsContainer = document.querySelector(".controls");
 const tabButtons = document.querySelectorAll(".tabs button");
-const box = document.querySelector(".info-box");
+const box = document.querySelector(".info_box");
+const optionInfoBox = document.querySelector(".additional_options_info_box");
 const loadingMsg = document.getElementById("loadingMsg");
 
 const Get = (id) => controlsContainer.querySelector(`#${id}`);
@@ -128,6 +130,8 @@ tabButtons.forEach((btn) => {
 
 function updateInfoBox(templateId) {
   box.innerHTML = infoTexts[templateId] || "<p>No info available</p>";
+  optionInfoBox.innerHTML =
+    optionsTexts[templateId] || "<p>No info available</p>";
 }
 
 function setUp() {

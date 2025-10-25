@@ -127,7 +127,6 @@ tabButtons.forEach((btn) => {
     const template = btn.dataset.template;
     updateInfoBox(template);
     loadTemplate(template);
-    console.log("process");
     processImage();
   });
 });

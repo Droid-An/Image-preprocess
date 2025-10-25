@@ -9,11 +9,6 @@ body {
     margin: 2rem;
 }
 
-canvas {
-    border: 1px solid #ccc;
-    max-width: 90vw;
-}
-
 .controls {
     display: flex;
     flex-direction: column;
@@ -27,19 +22,16 @@ label {
     justify-content: space-between;
     align-items: baseline;
 }
-/* ---- Layout container ---- */
+
 main {
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
-  /* overflow: hidden;  */
   box-sizing: border-box;
 }
 
 .canvas-container {
-  flex: 1 1 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,8 +40,6 @@ main {
   border-radius: 10px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
   padding: 0.5rem;
-  max-height: 100%;
-  overflow: hidden;
 }
 
 canvas {
@@ -60,7 +50,7 @@ canvas {
   object-fit: contain;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background: #fff;
+  background: #c9c9c9;
 }
 
 #loadingMsg {
@@ -122,6 +112,7 @@ canvas {
   margin-top: 0;
   color: #a6832a;
   font-size: 1.1rem;
+  
 }
 
 @media (max-width: 768px) {

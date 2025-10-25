@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Preprocessing for OCR</title>
     <link rel="stylesheet" href="style.css" />
-    <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+    <script src="https://docs.opencv.org/4.x/opencv.js"></script>
 </head>
 
 <body>
     <h2>Image Preprocessing Tool</h2>
     <input type="file" id="upload" accept="image/*" />
-    <p id="loadingMsg">Loading...</p>
+    <p id="loadingMsg">Loading page...</p>
     <div class="tabs">
         <button data-template="simpleThresholdControlsTemplate" class="active">Simple Threshold</button>
         <button data-template="adaptiveThresholdControlsTemplate">Adaptive Threshold</button>
@@ -78,7 +78,7 @@
         <button id="download">Download Processed Image</button>
     </template>
 
-    <script defer type="module" src="script.mjs"></script>
+    <script type="module" src="script.mjs"></script>
 </body>
 
 </html>

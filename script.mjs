@@ -158,4 +158,8 @@ function setUp() {
   };
 }
 
-window.onload = setUp;
+window.onload = () => {
+  loadingMsg.textContent = "Loading OpenCV...";
+  loadingMsg.classList.remove("hidden");
+  setUp();
+};

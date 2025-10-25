@@ -1,7 +1,7 @@
 "use strict";
 
-import { adaptiveThresholdView } from "./views/adaptiveThresholding.mjs";
-import { simpleThreshold } from "./views/simpleThreshold.mjs";
+import { adaptiveThreshold } from "./methods/adaptiveThresholding.mjs";
+import { simpleThreshold } from "./methods/simpleThreshold.mjs";
 import { infoTexts } from "./texts.mjs";
 const upload = document.getElementById("upload");
 const canvasOriginal = document.getElementById("canvasOriginal");
@@ -41,7 +41,7 @@ function processImage() {
   if (activeTab === "simpleThresholdControlsTemplate") {
     dst = simpleThreshold(src, dst, Get);
   } else if (activeTab === "adaptiveThresholdControlsTemplate") {
-    dst = adaptiveThresholdView(src, dst, Get);
+    dst = adaptiveThreshold(src, dst, Get);
   }
 
   cv.imshow(canvasProcessed, dst);

@@ -9,7 +9,7 @@ function simpleThreshold(src, dst, get_helper) {
     dst,
     +get_helper("threshold")?.value ?? 128,
     255,
-    cv.THRESH_BINARY
+    cv.THRESH_BINARY + cv.THRESH_OTSU
   );
   blurred.delete();
 

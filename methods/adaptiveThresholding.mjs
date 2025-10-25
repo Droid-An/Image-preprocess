@@ -1,4 +1,4 @@
-function adaptiveThresholdView(src, dst, get_helper) {
+function adaptiveThreshold(src, dst, get_helper) {
   // Adaptive threshold
   let blockSize = parseInt(get_helper("blockSize")?.value ?? 11);
   if (blockSize % 2 === 0) blockSize += 1;
@@ -15,4 +15,4 @@ function adaptiveThresholdView(src, dst, get_helper) {
   return dst;
 }
 
-export { adaptiveThresholdView };
+export { adaptiveThreshold };
